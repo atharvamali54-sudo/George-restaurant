@@ -1,1 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>George Restaurant | Pune — Indian, Chinese, Tandoor & Fast Food</title>
+<meta name="description" content="George Restaurant, Camp Pune. Reserve a table or order Indian, Chinese, Tandoor & Fast Food online.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍽️</text></svg>">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --charcoal:#1b1512;
+  --char-2:#241b17;
+  --maroon:#7c1420;
+  --maroon-deep:#5a0d16;
+  --gold:#c9a24a;
+  --gold-bright:#e2c26f;
+  --cream:#f7f1e6;
+  --cream-2:#efe6d4;
+  --ink:#2a201b;
+  --ok:#3f7a4f;
+  --font-display:'Fraunces', serif;
+  --font-body:'Manrope', sans-serif;
+  --radius:18px;
+  --radius-sm:10px;
+  --shadow-lg:0 30px 60px -25px rgba(0,0,0,.55);
+  --shadow-sm:0 10px 25px -12px rgba(0,0,0,.35);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+html[data-theme="dark"]{
+  --cream:#171210;
+  --cream-2:#1f1815;
+  --ink:#f2e9dc;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--font-body);
+  background:var(--cream);
+  color:var(--ink);
+  overflow-x:hidden;
+  transition:background .4s var(--ease), color .4s var(--ease);
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:.2px;}
+.container{width:min(1180px,92%);margin:0 auto;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--gold);}
+.section-title{font-size:clamp(1.8rem,4vw,2.7rem);font-weight:600;line-height:1.1;margin-bottom:14px;}
+.section-sub{color:var(--ink);opacity:.65;max-width:560px;font-size:1rem;line-height:1.6;margin-bottom:44px;}
+.section{padding:96px 0;}
+.section.tight{padding:64px 0;}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 30px;border-radius:100px;font-weight:700;font-size:.92rem;
+  letter-spacing:.02em;transition:all .35s var(--ease);cursor:pointer;white-space:nowrap;
+}
+.btn-primary{background:var(--maroon);color:#fff8ee;box-shadow:0 14px 30px -12px rgba(124,20,32,.6);}
+.btn-primary:hover{background:var(--maroon-deep);transform:translateY(-2px);}
+.btn-gold{background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1b1512;box-shadow:0 14px 30px -12px rgba(201,162,74,.55);}
+.btn-gold:hover{transform:translateY(-2px);filter:brightness(1.06);}
+.btn-outline{border:1.5px solid rgba(242,233,220,.5);color:inherit;background:rgba(255,255,255,.04);}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.btn-ghost{border:1.5px solid var(--ink);opacity:.85;}
+.btn-ghost:hover{opacity:1;border-color:var(--gold);color:var(--gold);}
+.badge{
+  font-size:.65rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 9px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;
+}
+.badge-veg{background:#e5f3e8;color:#237a3c;border:1px solid #9fd6ae;}
+.badge-nonveg{background:#fbe6e6;color:#a3272c;border:1px solid #e9a4a4;}
+.badge-spicy{background:#fff1e0;color:#c1631a;}
+.badge-popular{background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1b1512;}
+.veg-dot,.nonveg-dot{width:14px;height:14px;border:2px solid;display:inline-flex;align-items:center;justify-content:center;border-radius:3px;flex:none;}
+.veg-dot{border-color:#237a3c;}
+.veg-dot::after{content:"";width:6px;height:6px;border-radius:50%;background:#237a3c;}
+.nonveg-dot{border-color:#a3272c;}
+.nonveg-dot::after{content:"";width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:8px solid #a3272c;}
 
+/* ============ LOADER ============ */
+#loader{
+  position:fixed;inset:0;background:var(--charcoal);z-index:9999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  transition:opacity .6s var(--ease), visibility .6s var(--ease);
+}
+#loader.hide{opacity:0;visibility:hidden;}
+.loader-mark{font-family:var(--font-display);font-size:2.1rem;color:var(--gold-bright);letter-spacing:.08em;font-weight:600;}
+.loader-bar{width:180px;height:2px;background:rgba(242,233,220,.15);overflow:hidden;border-radius:2px;}
+.loader-bar::after{content:"";display:block;width:40%;height:100%;background:var(--gold-bright);animation:loadmove 1.1s ease-in-out infinite;}
+@keyframes loadmove{0%{transform:translateX(-100%);}100%{transform:translateX(350%);}}
+
+/* ============ NAV ============ */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  padding:22px 0;transition:all .4s var(--ease);
+}
+header.scrolled{
+  padding:12px 0;background:rgba(27,21,18,.86);backdrop-filter:blur(14px);
+  box-shadow:0 10px 30px -18px rgba(0,0,0,.6);
+}
+.nav-row{display:flex;align-items:center;justify-content:space-between;gap:18px;}
+.brand{display:flex;align-items:center;gap:11px;color:#fbf5e8;}
+.brand-mark{
+  width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold-bright),var(--maroon));
+  display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;color:#1b1512;font-size:1.05rem;flex:none;
+}
+.brand-name{font-family:var(--font-display);font-size:1.28rem;font-weight:600;letter-spacing:.03em;line-height:1;}
+.brand-tag{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-bright);opacity:.8;}
+nav.links{display:flex;gap:30px;align-items:center;}
+nav.links a{color:#f2e9dc;font-size:.9rem;font-weight:600;opacity:.82;transition:opacity .25s, color .25s;position:relative;}
+nav.links a:hover{opacity:1;color:var(--gold-bright);}
+.nav-actions{display:flex;align-items:center;gap:12px;}
+.icon-btn{
+  width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:rgba(242,233,220,.1);color:#f2e9dc;font-size:1.05rem;position:relative;transition:.25s;
+}
+.icon-btn:hover{background:rgba(242,233,220,.2);}
+.cart-count{
+  position:absolute;top:-4px;right:-4px;background:var(--maroon);color:#fff;font-size:.62rem;font-weight:800;
+  min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0 3px;
+}
+.burger{display:none;flex-direction:column;gap:5px;width:42px;height:42px;align-items:center;justify-content:center;}
+.burger span{width:22px;height:2px;background:#f2e9dc;border-radius:2px;transition:.3s;}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;
+  background:linear-gradient(180deg,rgba(15,11,9,.55),rgba(15,11,9,.86)),
+    url('https://i.ibb.co/CKP2PBgx/Screenshot-2026-07-25-10-47-25-571-com-google-android-apps-maps.jpg') center/cover no-repeat fixed;
+  color:#fbf5e8;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 18% 20%,rgba(201,162,74,.16),transparent 45%);
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:2;padding-top:110px;}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;font-size:.72rem;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--gold-bright);font-weight:700;margin-bottom:22px;
+  border:1px solid rgba(226,194,111,.4);padding:8px 16px;border-radius:100px;background:rgba(226,194,111,.06);
+}
+.hero h1{
+  font-size:clamp(2.6rem,7vw,5.2rem);font-weight:600;line-height:.98;letter-spacing:-.01em;
+  max-width:820px;margin-bottom:24px;
+}
+.hero h1 em{font-style:italic;color:var(--gold-bright);font-weight:500;}
+.hero p{font-size:1.12rem;opacity:.82;max-width:520px;line-height:1.65;margin-bottom:38px;}
+.hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:64px;}
+.hero-meta{display:flex;flex-wrap:wrap;gap:34px;border-top:1px solid rgba(242,233,220,.18);padding-top:28px;max-width:720px;}
+.hero-meta div{display:flex;flex-direction:column;gap:4px;}
+.hero-meta .num{font-family:var(--font-display);font-size:1.7rem;color:var(--gold-bright);font-weight:600;}
+.hero-meta .lbl{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;opacity:.65;}
+.scroll-cue{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:8px;color:#f2e9dc;opacity:.6;font-size:.66rem;
+  letter-spacing:.14em;text-transform:uppercase;
+}
+.scroll-cue .line{width:1px;height:36px;background:linear-gradient(#f2e9dc,transparent);animation:scrolldown 1.8s infinite;}
+@keyframes scrolldown{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+/* ============ OFFERS TICKER ============ */
+.ticker-wrap{background:var(--maroon);color:#fdf2e3;overflow:hidden;padding:13px 0;position:relative;z-index:3;}
+.ticker{display:flex;gap:60px;white-space:nowrap;animation:ticker 22s linear infinite;width:max-content;}
+.ticker span{font-size:.84rem;font-weight:700;letter-spacing:.03em;display:flex;align-items:center;gap:10px;}
+.ticker span::before{content:"✦";color:var(--gold-bright);}
+@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ============ WHY CHOOSE ============ */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.why-card{
+  background:var(--cream-2);border-radius:var(--radius);padding:34px 26px;border:1px solid rgba(124,20,32,.08);
+  transition:transform .4s var(--ease), box-shadow .4s var(--ease);
+}
+.why-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-sm);}
+.why-icon{
+  width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--gold-bright),var(--gold));
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:18px;
+}
+.why-card h3{font-size:1.08rem;font-weight:600;margin-bottom:8px;}
+.why-card p{font-size:.88rem;opacity:.68;line-height:1.55;}
+
+.counters{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:60px;padding-top:52px;border-top:1px solid rgba(124,20,32,.12);}
+.counter{text-align:center;}
+.counter .n{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--maroon);}
+html[data-theme="dark"] .counter .n{color:var(--gold-bright);}
+.counter .l{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-top:4px;}
+
+/* ============ SPECIALS STRIP ============ */
+.specials-strip{
+  background:linear-gradient(120deg,var(--charcoal),var(--maroon-deep));color:#fbf5e8;border-radius:var(--radius);
+  padding:44px 40px;display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+}
+.specials-strip::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 90% 10%,rgba(226,194,111,.18),transparent 50%);}
+.specials-strip h3{font-size:1.6rem;font-weight:600;position:relative;}
+.specials-strip p{opacity:.75;font-size:.92rem;max-width:420px;position:relative;margin-top:6px;}
+.coupon-box{
+  background:rgba(242,233,220,.08);border:1.5px dashed var(--gold-bright);border-radius:12px;
+  padding:14px 22px;display:flex;align-items:center;gap:14px;position:relative;
+}
+.coupon-box .code{font-family:var(--font-display);font-weight:700;color:var(--gold-bright);font-size:1.1rem;letter-spacing:.06em;}
+.copy-btn{background:var(--gold-bright);color:#1b1512;padding:8px 14px;border-radius:8px;font-size:.75rem;font-weight:800;}
+
+/* ============ MENU ============ */
+.menu-toolbar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:34px;}
+.search-box{
+  flex:1 1 260px;display:flex;align-items:center;gap:10px;background:var(--cream-2);
+  border:1px solid rgba(124,20,32,.12);border-radius:100px;padding:13px 20px;
+}
+.search-box input{flex:1;background:none;border:none;outline:none;color:inherit;font-family:inherit;font-size:.92rem;}
+.filter-chips{display:flex;flex-wrap:wrap;gap:9px;}
+.chip{
+  padding:9px 16px;border-radius:100px;font-size:.78rem;font-weight:700;background:var(--cream-2);
+  border:1px solid rgba(124,20,32,.12);opacity:.72;transition:.25s;
+}
+.chip.active,.chip:hover{opacity:1;background:var(--maroon);color:#fff;border-color:var(--maroon);}
+.cat-tabs{display:flex;gap:10px;overflow-x:auto;padding-bottom:14px;margin-bottom:8px;scrollbar-width:thin;}
+.cat-tabs::-webkit-scrollbar{height:4px;}
+.cat-tabs::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px;}
+.cat-tab{
+  flex:none;padding:10px 20px;border-radius:100px;font-size:.82rem;font-weight:700;white-space:nowrap;
+  background:transparent;border:1.5px solid rgba(124,20,32,.18);opacity:.7;
+}
+.cat-tab.active{background:var(--gold);border-color:var(--gold);color:#1b1512;opacity:1;}
+.sort-select{
+  padding:11px 16px;border-radius:100px;border:1px solid rgba(124,20,32,.12);background:var(--cream-2);
+  font-family:inherit;font-size:.82rem;font-weight:700;color:inherit;
+}
+
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.food-card{
+  background:var(--cream-2);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(124,20,32,.08);
+  transition:transform .4s var(--ease), box-shadow .4s var(--ease);display:flex;flex-direction:column;
+}
+.food-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-sm);}
+.food-img-wrap{position:relative;aspect-ratio:4/3;overflow:hidden;background:#ddd3;cursor:pointer;}
+.food-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease);}
+.food-card:hover .food-img-wrap img{transform:scale(1.08);}
+.food-badges{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:6px;}
+.fav-btn{
+  position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.85);
+  display:flex;align-items:center;justify-content:center;font-size:1.05rem;transition:.25s;color:#a3272c;
+}
+.fav-btn.active{background:var(--gold-bright);}
+.food-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1;}
+.food-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.food-name{font-family:var(--font-display);font-size:1.08rem;font-weight:600;line-height:1.25;}
+.food-price{font-family:var(--font-display);font-weight:700;color:var(--maroon);font-size:1.08rem;white-space:nowrap;}
+html[data-theme="dark"] .food-price{color:var(--gold-bright);}
+.food-desc{font-size:.82rem;opacity:.62;line-height:1.5;flex:1;}
+.food-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.food-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:6px;gap:10px;}
+.add-btn{
+  flex:1;background:var(--maroon);color:#fff;padding:11px 14px;border-radius:100px;font-weight:700;font-size:.82rem;
+  transition:.3s;display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.add-btn:hover{background:var(--maroon-deep);}
+.qty-stepper{display:flex;align-items:center;gap:10px;background:var(--maroon);border-radius:100px;padding:6px 10px;flex:1;justify-content:center;}
+.qty-stepper button{color:#fff;font-weight:800;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.qty-stepper .q{color:#fff;font-weight:700;font-size:.9rem;min-width:16px;text-align:center;}
+.empty-note{grid-column:1/-1;text-align:center;padding:60px 20px;opacity:.55;font-size:.95rem;}
+
+/* recently viewed / recommended */
+.rail{display:flex;gap:18px;overflow-x:auto;padding-bottom:10px;scrollbar-width:thin;}
+.rail::-webkit-scrollbar{height:5px;}
+.rail::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px;}
+.rail-card{
+  flex:none;width:190px;background:var(--cream-2);border-radius:14px;overflow:hidden;border:1px solid rgba(124,20,32,.08);
+}
+.rail-card img{width:100%;height:120px;object-fit:cover;}
+.rail-card .rc-body{padding:12px 14px;}
+.rail-card .rc-name{font-size:.84rem;font-weight:700;margin-bottom:2px;}
+.rail-card .rc-price{font-size:.8rem;color:var(--maroon);font-weight:700;}
+html[data-theme="dark"] .rail-card .rc-price{color:var(--gold-bright);}
+
+/* ============ BOOKING ============ */
+.booking{
+  background:linear-gradient(120deg,var(--charcoal),#241a17);color:#fbf5e8;border-radius:28px;
+  padding:64px 46px;position:relative;overflow:hidden;
+}
+.booking::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 20%,rgba(226,194,111,.14),transparent 55%);}
+.booking-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:52px;position:relative;}
+.booking-info .eyebrow{color:var(--gold-bright);}
+.booking-info h2{color:#fbf5e8;font-size:clamp(1.7rem,3.4vw,2.4rem);margin-bottom:16px;}
+.booking-info p{opacity:.72;line-height:1.7;margin-bottom:28px;font-size:.95rem;}
+.booking-facts{display:flex;flex-direction:column;gap:16px;}
+.booking-facts .f{display:flex;gap:14px;align-items:flex-start;font-size:.88rem;opacity:.85;}
+.booking-facts .f .ic{color:var(--gold-bright);font-size:1.05rem;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.field{display:flex;flex-direction:column;gap:7px;}
+.field.full{grid-column:1/-1;}
+.field label{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;opacity:.7;font-weight:700;}
+.field input,.field select,.field textarea{
+  background:rgba(242,233,220,.06);border:1px solid rgba(242,233,220,.2);border-radius:10px;
+  padding:13px 14px;color:#fbf5e8;font-family:inherit;font-size:.92rem;outline:none;transition:.25s;
+}
+.field input::placeholder,.field textarea::placeholder{color:rgba(242,233,220,.4);}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold-bright);background:rgba(242,233,220,.1);}
+.field select option{color:#1b1512;}
+.seg{display:flex;gap:10px;}
+.seg-opt{
+  flex:1;text-align:center;padding:12px;border-radius:10px;border:1px solid rgba(242,233,220,.2);
+  font-size:.84rem;font-weight:700;background:rgba(242,233,220,.05);
+}
+.seg-opt.active{background:var(--gold);border-color:var(--gold);color:#1b1512;}
+.form-msg{margin-top:16px;padding:14px 18px;border-radius:10px;font-size:.88rem;display:none;line-height:1.5;}
+.form-msg.show{display:block;}
+.form-msg.ok{background:rgba(63,122,79,.18);border:1px solid rgba(63,122,79,.4);color:#bfe7c9;}
+
+/* ============ GALLERY ============ */
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;gap:16px;}
+.gallery-grid a{grid-column:span 1;grid-row:span 1;border-radius:16px;overflow:hidden;position:relative;cursor:pointer;}
+.gallery-grid a:nth-child(1){grid-column:span 2;grid-row:span 2;}
+.gallery-grid a:nth-child(4){grid-column:span 2;}
+.gallery-grid img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease);}
+.gallery-grid a:hover img{transform:scale(1.08);}
+.gallery-grid a::after{
+  content:attr(data-label);position:absolute;left:14px;bottom:12px;color:#fff;font-weight:700;font-size:.82rem;
+  text-shadow:0 2px 8px rgba(0,0,0,.6);
+}
+.gallery-grid a::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.65));}
+
+/* ============ REVIEWS ============ */
+.reviews-track{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:16px;scrollbar-width:thin;}
+.reviews-track::-webkit-scrollbar{height:5px;}
+.reviews-track::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px;}
+.review-card{
+  scroll-snap-align:start;flex:none;width:340px;background:var(--cream-2);border-radius:var(--radius);
+  padding:30px 26px;border:1px solid rgba(124,20,32,.08);
+}
+.stars{color:var(--gold);font-size:.95rem;letter-spacing:2px;margin-bottom:14px;}
+.review-card p{font-size:.9rem;line-height:1.65;opacity:.78;margin-bottom:20px;}
+.reviewer{display:flex;align-items:center;gap:12px;}
+.reviewer .av{
+  width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold-bright),var(--maroon));
+  display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-family:var(--font-display);
+}
+.reviewer .rname{font-weight:700;font-size:.88rem;}
+.reviewer .rmeta{font-size:.72rem;opacity:.55;}
+
+/* ============ FAQ ============ */
+.faq-item{border-bottom:1px solid rgba(124,20,32,.14);padding:22px 0;}
+.faq-q{display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:20px;}
+.faq-q h4{font-size:1rem;font-weight:600;}
+.faq-q .plus{font-size:1.3rem;color:var(--maroon);transition:transform .3s;flex:none;}
+html[data-theme="dark"] .faq-q .plus{color:var(--gold-bright);}
+.faq-item.open .plus{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s var(--ease);}
+.faq-item.open .faq-a{max-height:200px;}
+.faq-a p{padding-top:14px;font-size:.88rem;opacity:.68;line-height:1.6;max-width:640px;}
+
+/* ============ CONTACT ============ */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:stretch;}
+.contact-card{background:var(--cream-2);border-radius:var(--radius);padding:40px;border:1px solid rgba(124,20,32,.08);}
+.contact-row{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid rgba(124,20,32,.1);}
+.contact-row:last-child{border-bottom:none;}
+.contact-row .ic{
+  width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--gold-bright),var(--gold));
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex:none;
+}
+.contact-row h4{font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;opacity:.6;margin-bottom:3px;}
+.contact-row p,.contact-row a{font-size:.95rem;font-weight:600;}
+.social-row{display:flex;gap:12px;margin-top:22px;}
+.social-row a{
+  width:42px;height:42px;border-radius:50%;background:var(--maroon);color:#fff;display:flex;align-items:center;
+  justify-content:center;font-size:1rem;transition:.3s;
+}
+.social-row a:hover{background:var(--gold);color:#1b1512;transform:translateY(-3px);}
+.map-embed{border-radius:var(--radius);overflow:hidden;min-height:340px;border:1px solid rgba(124,20,32,.08);}
+.map-embed iframe{width:100%;height:100%;min-height:340px;border:0;display:block;}
+
+/* ============ FOOTER ============ */
+footer{background:var(--charcoal);color:#f2e9dc;padding:70px 0 26px;}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(242,233,220,.12);}
+.footer-brand p{opacity:.6;font-size:.88rem;line-height:1.7;margin-top:14px;max-width:280px;}
+footer h4{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:18px;}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+footer ul a{opacity:.68;font-size:.88rem;transition:.25s;}
+footer ul a:hover{opacity:1;color:var(--gold-bright);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:26px;font-size:.78rem;opacity:.5;flex-wrap:wrap;gap:10px;}
+
+/* ============ FLOATING ============ */
+.floating-stack{position:fixed;right:22px;bottom:22px;display:flex;flex-direction:column;gap:12px;z-index:500;}
+.fab{
+  width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+  box-shadow:0 12px 28px -10px rgba(0,0,0,.45);transition:.3s;color:#fff;
+}
+.fab:hover{transform:translateY(-4px) scale(1.05);}
+.fab.whatsapp{background:#25D366;}
+.fab.call{background:var(--maroon);}
+.fab.top{background:var(--charcoal);opacity:0;pointer-events:none;transform:translateY(10px);}
+.fab.top.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+.reserve-pill{
+  position:fixed;left:22px;bottom:22px;z-index:500;background:var(--gold);color:#1b1512;padding:15px 24px;
+  border-radius:100px;font-weight:800;font-size:.86rem;box-shadow:0 12px 28px -10px rgba(0,0,0,.4);
+  display:flex;align-items:center;gap:8px;transition:.3s;
+}
+.reserve-pill:hover{transform:translateY(-3px);}
+
+/* ============ CART DRAWER ============ */
+.overlay{position:fixed;inset:0;background:rgba(15,11,9,.55);z-index:800;opacity:0;pointer-events:none;transition:opacity .35s var(--ease);backdrop-filter:blur(2px);}
+.overlay.show{opacity:1;pointer-events:auto;}
+.cart-drawer{
+  position:fixed;top:0;right:0;bottom:0;width:min(420px,92vw);background:var(--cream);z-index:900;
+  transform:translateX(100%);transition:transform .45s var(--ease);display:flex;flex-direction:column;
+  box-shadow:-20px 0 50px -20px rgba(0,0,0,.4);
+}
+.cart-drawer.show{transform:translateX(0);}
+.cart-head{padding:26px 26px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(124,20,32,.12);}
+.cart-head h3{font-size:1.3rem;font-weight:600;}
+.close-x{width:36px;height:36px;border-radius:50%;background:var(--cream-2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.cart-items{flex:1;overflow-y:auto;padding:16px 26px;}
+.cart-item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid rgba(124,20,32,.08);}
+.cart-item img{width:66px;height:66px;border-radius:12px;object-fit:cover;flex:none;}
+.ci-body{flex:1;display:flex;flex-direction:column;gap:6px;}
+.ci-top{display:flex;justify-content:space-between;gap:8px;}
+.ci-name{font-size:.92rem;font-weight:700;}
+.ci-remove{color:var(--maroon);font-size:.78rem;opacity:.6;}
+.ci-bottom{display:flex;justify-content:space-between;align-items:center;}
+.ci-step{display:flex;align-items:center;gap:10px;background:var(--cream-2);border-radius:100px;padding:5px 10px;}
+.ci-step button{font-weight:800;width:20px;}
+.ci-total{font-weight:700;font-size:.9rem;color:var(--maroon);}
+html[data-theme="dark"] .ci-total{color:var(--gold-bright);}
+.cart-empty{text-align:center;padding:60px 20px;opacity:.55;}
+.cart-empty .em{font-size:2.6rem;margin-bottom:14px;}
+.cart-foot{padding:22px 26px 28px;border-top:1px solid rgba(124,20,32,.12);}
+.cart-sub{display:flex;justify-content:space-between;font-size:.86rem;opacity:.65;margin-bottom:8px;}
+.cart-grand{display:flex;justify-content:space-between;font-size:1.15rem;font-weight:700;margin-bottom:18px;}
+.cart-foot .btn{width:100%;}
+
+/* ============ MODAL (checkout / lightbox / success) ============ */
+.modal{
+  position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .35s var(--ease);
+}
+.modal.show{opacity:1;pointer-events:auto;}
+.modal-backdrop{position:absolute;inset:0;background:rgba(15,11,9,.68);backdrop-filter:blur(4px);}
+.modal-box{
+  position:relative;background:var(--cream);border-radius:24px;width:min(560px,100%);max-height:88vh;overflow-y:auto;
+  padding:38px;transform:translateY(24px) scale(.97);transition:transform .4s var(--ease);
+}
+.modal.show .modal-box{transform:translateY(0) scale(1);}
+.modal-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;background:var(--cream-2);display:flex;align-items:center;justify-content:center;}
+.modal-box h3{font-size:1.5rem;margin-bottom:20px;}
+.order-summary{background:var(--cream-2);border-radius:14px;padding:16px 18px;margin-bottom:20px;max-height:160px;overflow-y:auto;}
+.order-summary .row{display:flex;justify-content:space-between;font-size:.84rem;padding:6px 0;}
+.order-summary .row.total{border-top:1px solid rgba(124,20,32,.15);margin-top:6px;padding-top:10px;font-weight:700;}
+.pay-opts{display:flex;gap:10px;}
+.pay-opt{flex:1;padding:12px;border-radius:10px;border:1.5px solid rgba(124,20,32,.15);text-align:center;font-size:.8rem;font-weight:700;opacity:.65;}
+.pay-opt.active{opacity:1;border-color:var(--maroon);background:rgba(124,20,32,.06);}
+
+.success-box{text-align:center;padding:20px 10px;}
+.success-icon{width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,var(--gold-bright),var(--gold));display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin:0 auto 22px;}
+.success-box h3{margin-bottom:10px;}
+.success-box p{opacity:.7;font-size:.92rem;line-height:1.6;margin-bottom:26px;}
+.success-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+
+.lightbox-img{max-width:100%;border-radius:16px;max-height:75vh;object-fit:contain;margin:0 auto;display:block;}
+
+/* ============ MISC ============ */
+.center-cta{text-align:center;margin-top:44px;}
+.tri{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:36px;}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:1000px){
+  .why-grid{grid-template-columns:repeat(2,1fr);}
+  .menu-grid{grid-template-columns:repeat(2,1fr);}
+  .booking-grid{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery-grid a:nth-child(1){grid-column:span 2;}
+  .counters{grid-template-columns:repeat(2,1fr);gap:30px;}
+}
+@media(max-width:760px){
+  nav.links{display:none;}
+  .burger{display:flex;}
+  .why-grid{grid-template-columns:1fr;}
+  .menu-grid{grid-template-columns:1fr;}
+  .form-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;gap:30px;}
+  .hero-meta{gap:22px;}
+  .booking{padding:40px 24px;}
+  .contact-card{padding:26px;}
+  .reserve-pill span.txt{display:none;}
+  .reserve-pill{padding:15px;}
+}
+.mobile-menu{
+  position:fixed;inset:0;background:var(--charcoal);z-index:950;display:flex;flex-direction:column;
+  padding:100px 30px 40px;gap:26px;transform:translateY(-100%);transition:transform .4s var(--ease);
+}
+.mobile-menu.show{transform:translateY(0);}
+.mobile-menu a{color:#fbf5e8;font-family:var(--font-display);font-size:1.7rem;font-weight:600;}
+.mobile-menu .mm-close{position:absolute;top:26px;right:26px;width:44px;height:44px;border-radius:50%;background:rgba(242,233,220,.1);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+}
+</style>
+</head>
+<body>
+
+<div id="loader"><div class="loader-mark">George Restaurant</div><div class="loader-bar"></div></div>
+
+<!-- ============ HEADER ============ -->
+<header id="siteHeader">
+  <div class="container nav-row">
+    <a href="#home" class="brand">
+      <div class="brand-mark">G</div>
+      <div>
+        <div class="brand-name">George Restaurant</div>
+        <div class="brand-tag">Est. Camp, Pune</div>
+      </div>
+    </a>
+    <nav class="links">
+      <a href="#menu">Menu</a>
+      <a href="#booking">Reserve</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" title="Toggle theme">🌙</button>
+      <button class="icon-btn" id="cartOpenBtn" title="Cart">🛒<span class="cart-count" id="cartCount">0</span></button>
+      <button class="burger" id="burgerBtn"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mm-close" id="mmClose">✕</div>
+  <a href="#menu">Menu</a>
+  <a href="#booking">Reserve</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#reviews">Reviews</a>
+  <a href="#faq">FAQ</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow">📍 Camp, Pune · Open 11 AM – 11 PM</div>
+    <h1>Table for two, <em>flavour</em> for the whole city.</h1>
+    <p>Indian, Chinese, Tandoor & fast food cooked to order — reserve your table or get it delivered anywhere in Pune, no app required.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn btn-gold">🍽️ Book a Table</a>
+      <a href="#menu" class="btn btn-outline">🛍️ Order Food</a>
+    </div>
+    <div class="hero-meta">
+      <div><div class="num" data-count="15">0</div><div class="lbl">Years Serving Pune</div></div>
+      <div><div class="num" data-count="40">0</div><div class="lbl">Menu Favourites</div></div>
+      <div><div class="num" data-count="12000">0</div><div class="lbl">Happy Diners</div></div>
+      <div><div class="num" data-count="4.6" data-decimal="1">0</div><div class="lbl">Average Rating</div></div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><div class="line"></div></div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker" id="tickerRow"></div>
+</div>
+
+<!-- ============ WHY CHOOSE US ============ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Why George</div>
+      <h2 class="section-title">Old-school hospitality,<br>new-school convenience.</h2>
+      <p class="section-sub">A neighbourhood favourite on General Thimayya Road since day one — now on your phone too.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal"><div class="why-icon">👨‍🍳</div><h3>Chef-Led Kitchen</h3><p>Every dish is made fresh to order by our tandoor and wok chefs — no pre-mixed shortcuts.</p></div>
+      <div class="why-card reveal"><div class="why-icon">⚡</div><h3>Fast Service</h3><p>From kitchen to table (or your doorstep) in minutes, without compromising on taste.</p></div>
+      <div class="why-card reveal"><div class="why-icon">🌶️</div><h3>Real Regional Flavour</h3><p>Authentic Indian, Chinese and Tandoor recipes with the spice level exactly how you like it.</p></div>
+      <div class="why-card reveal"><div class="why-icon">🚴</div><h3>City-Wide Delivery</h3><p>We deliver all over Pune, plus dine-in and takeaway at our Camp location every day.</p></div>
+    </div>
+    <div class="counters">
+      <div class="counter reveal"><div class="n" data-count="15">0</div><div class="l">Years Open</div></div>
+      <div class="counter reveal"><div class="n" data-count="36">0</div><div class="l">Menu Items</div></div>
+      <div class="counter reveal"><div class="n" data-count="12000">0</div><div class="l">Orders Served</div></div>
+      <div class="counter reveal"><div class="n" data-count="98">0</div><div class="l">% Would Recommend</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENU / ORDERING ============ -->
+<section class="section tight" id="menu">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Order Online</div>
+      <h2 class="section-title">Today's Menu</h2>
+      <p class="section-sub">Search, filter and build your order — everything is added straight to your cart.</p>
+    </div>
+
+    <div class="specials-strip reveal" style="margin-bottom:40px;">
+      <div>
+        <h3>🎉 Today's Special — Weekend Offer</h3>
+        <p>Order any Biryani + get a Cold Coffee at half price. Valid on all orders above ₹400.</p>
+      </div>
+      <div class="coupon-box">
+        <div>
+          <div style="font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7;">Coupon Code</div>
+          <div class="code">GEORGE10</div>
+        </div>
+        <button class="copy-btn" id="copyCoupon">Copy</button>
+      </div>
+    </div>
+
+    <div class="menu-toolbar reveal">
+      <div class="search-box">
+        <span>🔍</span>
+        <input type="text" id="searchInput" placeholder="Search for biryani, paneer, tandoori...">
+      </div>
+      <div class="filter-chips">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="veg">🟢 Veg Only</button>
+        <button class="chip" data-filter="nonveg">🔴 Non-Veg</button>
+        <button class="chip" data-filter="popular">⭐ Popular</button>
+        <button class="chip" data-filter="favorites">❤ Favourites</button>
+      </div>
+    </div>
+
+    <div class="tri reveal">
+      <div class="cat-tabs" id="catTabs"></div>
+      <select class="sort-select" id="sortSelect">
+        <option value="default">Sort: Recommended</option>
+        <option value="low">Price: Low to High</option>
+        <option value="high">Price: High to Low</option>
+        <option value="az">Name: A–Z</option>
+      </select>
+    </div>
+
+    <div class="menu-grid" id="menuGrid"></div>
+
+    <div style="margin-top:56px;" class="reveal" id="recentWrap">
+      <h3 style="font-size:1.2rem;font-weight:600;margin-bottom:16px;">Recently Viewed</h3>
+      <div class="rail" id="recentRail"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOOKING ============ -->
+<section class="section" id="booking">
+  <div class="container">
+    <div class="booking reveal">
+      <div class="booking-grid">
+        <div class="booking-info">
+          <div class="eyebrow">Reserve</div>
+          <h2>Book your table<br>in under a minute.</h2>
+          <p>Tell us when you're coming and how many of you there are — our team will call to confirm your reservation.</p>
+          <div class="booking-facts">
+            <div class="f"><span class="ic">📍</span><span>2436, General Thimayya Road, East St, Camp, Pune 411001</span></div>
+            <div class="f"><span class="ic">🕚</span><span>Open daily, 11:00 AM – 11:00 PM</span></div>
+            <div class="f"><span class="ic">📞</span><span>020 6602 0121 — call or WhatsApp</span></div>
+          </div>
+        </div>
+        <div>
+          <form id="bookingForm">
+            <div class="form-grid">
+              <div class="field"><label>Full Name</label><input type="text" name="name" required placeholder="Your name"></div>
+              <div class="field"><label>Mobile Number</label><input type="tel" name="mobile" required pattern="[0-9]{10}" placeholder="10-digit number"></div>
+              <div class="field"><label>Email (optional)</label><input type="email" name="email" placeholder="you@email.com"></div>
+              <div class="field"><label>Number of Guests</label><input type="number" name="guests" min="1" max="30" required placeholder="e.g. 4"></div>
+              <div class="field"><label>Date</label><input type="date" name="date" required></div>
+              <div class="field"><label>Time</label><input type="time" name="time" required></div>
+              <div class="field full">
+                <label>Seating Preference</label>
+                <div class="seg" id="seatingSeg">
+                  <div class="seg-opt active" data-val="Indoor">Indoor</div>
+                  <div class="seg-opt" data-val="Outdoor">Outdoor</div>
+                </div>
+                <input type="hidden" name="seating" value="Indoor">
+              </div>
+              <div class="field full"><label>Special Requests</label><textarea name="requests" rows="3" placeholder="Birthday setup, high chair, allergies..."></textarea></div>
+            </div>
+            <button type="submit" class="btn btn-gold" style="margin-top:22px;width:100%;">Request Reservation</button>
+            <div class="form-msg" id="bookingMsg"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="section tight" id="gallery">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Inside George</div>
+      <h2 class="section-title">Gallery</h2>
+      <p class="section-sub">A peek at our dining room, kitchen and the dishes that keep Pune coming back.</p>
+    </div>
+    <div class="gallery-grid reveal" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="section tight" id="reviews">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Testimonials</div>
+      <h2 class="section-title">What Pune is saying</h2>
+    </div>
+    <div class="reviews-track reveal" id="reviewsTrack"></div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section tight" id="faq">
+  <div class="container" style="max-width:800px;">
+    <div class="reveal">
+      <div class="eyebrow">Good to Know</div>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+    </div>
+    <div id="faqList" class="reveal"></div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Get in Touch</div>
+      <h2 class="section-title">Visit or Reach Us</h2>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-card">
+        <div class="contact-row"><div class="ic">📍</div><div><h4>Address</h4><p>2436, General Thimayya Road, East St, Camp, Pune, Maharashtra 411001</p></div></div>
+        <div class="contact-row"><div class="ic">📞</div><div><h4>Phone / WhatsApp</h4><a href="tel:02066020121">020 6602 0121</a></div></div>
+        <div class="contact-row"><div class="ic">✉️</div><div><h4>Email</h4><a href="mailto:atharvamali54@gmail.com">atharvamali54@gmail.com</a></div></div>
+        <div class="contact-row"><div class="ic">🕚</div><div><h4>Opening Hours</h4><p>Daily, 11:00 AM – 11:00 PM</p></div></div>
+        <div class="contact-row"><div class="ic">🍜</div><div><h4>Cuisine</h4><p>Indian · Chinese · Tandoor · Fast Food</p></div></div>
+        <div class="social-row">
+          <a href="#" title="Instagram">📷</a>
+          <a href="#" title="Facebook">📘</a>
+          <a href="https://wa.me/912066020121" title="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div class="map-embed">
+        <iframe src="https://www.google.com/maps?q=2436+General+Thimayya+Road+Camp+Pune+411001&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand" style="color:#fbf5e8;">
+          <div class="brand-mark">G</div>
+          <div><div class="brand-name">George Restaurant</div><div class="brand-tag">Delicious Food · Fast Service</div></div>
+        </div>
+        <p>Serving Indian, Chinese, Tandoor and Fast Food from Camp, Pune — dine-in, takeaway or delivered anywhere in the city.</p>
+      </div>
+      <div><h4>Explore</h4><ul>
+        <li><a href="#menu">Order Food</a></li>
+        <li><a href="#booking">Book a Table</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+      </ul></div>
+      <div><h4>Info</h4><ul>
+        <li><a href="#faq">FAQs</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="https://maps.app.goo.gl/yWhGdLqyEnKRsGfu6" target="_blank">Directions</a></li>
+        <li><a href="tel:02066020121">Call Us</a></li>
+      </ul></div>
+      <div><h4>Contact</h4><ul>
+        <li>2436, General Thimayya Road, Camp, Pune 411001</li>
+        <li>020 6602 0121</li>
+        <li>atharvamali54@gmail.com</li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="yr"></span> George Restaurant. All rights reserved.</span>
+      <span>Made with ♥ in Pune</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ FLOATING ============ -->
+<a href="#booking" class="reserve-pill">📅 <span class="txt">Reserve a Table</span></a>
+<div class="floating-stack">
+  <a class="fab whatsapp" href="https://wa.me/912066020121" title="Chat on WhatsApp">💬</a>
+  <a class="fab call" href="tel:02066020121" title="Call Us">📞</a>
+  <button class="fab top" id="topBtn" title="Back to top">↑</button>
+</div>
+
+<!-- ============ CART DRAWER ============ -->
+<div class="overlay" id="overlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head"><h3>Your Order</h3><button class="close-x" id="cartClose">✕</button></div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot" id="cartFoot">
+    <div class="cart-sub"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div>
+    <div class="cart-grand"><span>Grand Total</span><span id="cartGrandTotal">₹0</span></div>
+    <button class="btn btn-primary" id="checkoutBtn">Proceed to Checkout</button>
+  </div>
+</div>
+
+<!-- ============ CHECKOUT MODAL ============ -->
+<div class="modal" id="checkoutModal">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <button class="modal-close" data-close-modal>✕</button>
+    <h3>Checkout</h3>
+    <div class="order-summary" id="checkoutSummary"></div>
+    <form id="checkoutForm">
+      <div class="form-grid" style="grid-template-columns:1fr;">
+        <div class="field"><label>Customer Name</label><input type="text" name="cname" required placeholder="Your name"></div>
+        <div class="field"><label>Phone Number</label><input type="tel" name="cphone" required pattern="[0-9]{10}" placeholder="10-digit number"></div>
+        <div class="field"><label>Delivery Address</label><textarea name="caddress" rows="2" placeholder="Flat / street / landmark, Pune"></textarea></div>
+        <div class="field">
+          <label>Order Type</label>
+          <div class="seg" id="orderTypeSeg">
+            <div class="seg-opt active" data-val="Dine-In">Dine-In</div>
+            <div class="seg-opt" data-val="Takeaway">Takeaway</div>
+            <div class="seg-opt" data-val="Home Delivery">Delivery</div>
+          </div>
+          <input type="hidden" name="ordertype" value="Dine-In">
+        </div>
+        <div class="field">
+          <label>Payment Method</label>
+          <div class="pay-opts" id="payOpts">
+            <div class="pay-opt active" data-val="Cash">Cash</div>
+            <div class="pay-opt" data-val="UPI">UPI</div>
+            <div class="pay-opt" data-val="Pay at Restaurant">Pay at Restaurant</div>
+          </div>
+          <input type="hidden" name="paymethod" value="Cash">
+        </div>
+        <div class="field"><label>Special Instructions</label><textarea name="cnotes" rows="2" placeholder="Less spicy, extra napkins, etc."></textarea></div>
+      </div>
+      <button type="submit" class="btn btn-primary" style="margin-top:20px;width:100%;">Place Order</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ SUCCESS MODAL ============ -->
+<div class="modal" id="successModal">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <button class="modal-close" data-close-modal>✕</button>
+    <div class="success-box">
+      <div class="success-icon">✅</div>
+      <h3>Order Received!</h3>
+      <p>Thank you for ordering from George Restaurant. We will contact you shortly to confirm your order.</p>
+      <div class="success-actions">
+        <a href="https://wa.me/912066020121" class="btn btn-gold" target="_blank">💬 Message us on WhatsApp</a>
+        <button class="btn btn-ghost" data-close-modal>Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="modal" id="lightboxModal">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box" style="padding:16px;background:transparent;box-shadow:none;">
+    <button class="modal-close" style="background:#fff;" data-close-modal>✕</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   GEORGE RESTAURANT — single-file app logic
+   ============================================================ */
+(function(){
+
+/* ---------- MENU DATA ---------- */
+const MENU = [
+{id:1,name:"Paneer Tikka",price:220,category:"Starters",veg:true,spicy:true,popular:true,img:"https://loremflickr.com/640/480/paneertikka",desc:"Char-grilled cottage cheese cubes marinated in yoghurt and tandoori spices."},
+{id:2,name:"Chicken Tikka",price:260,category:"Starters",veg:false,spicy:true,popular:true,img:"https://loremflickr.com/640/480/chickentikka",desc:"Boneless chicken chunks roasted in the tandoor with smoky masala."},
+{id:3,name:"Seekh Kebab",price:240,category:"Starters",veg:false,spicy:true,popular:false,img:"https://loremflickr.com/640/480/seekhkebab",desc:"Minced mutton skewers spiced and grilled over charcoal."},
+{id:4,name:"Veg Spring Roll",price:180,category:"Starters",veg:true,spicy:false,popular:false,img:"https://loremflickr.com/640/480/springroll",desc:"Crisp rolls packed with julienned vegetables, served with chilli dip."},
+{id:5,name:"Chicken 65",price:230,category:"Starters",veg:false,spicy:true,popular:true,img:"https://loremflickr.com/640/480/chicken65",desc:"Deep-fried spiced chicken bites tossed with curry leaf and chilli."},
+{id:6,name:"Tandoori Chicken (Half)",price:280,category:"Tandoor",veg:false,spicy:true,popular:false,img:"https://loremflickr.com/640/480/tandoorichicken",desc:"Classic clay-oven roasted chicken, smoky and juicy."},
+{id:7,name:"Tandoori Chicken (Full)",price:480,category:"Tandoor",veg:false,spicy:true,popular:true,img:"https://loremflickr.com/640/480/tandoorichicken,full",desc:"Full portion of our signature tandoori chicken, great for sharing."},
+{id:8,name:"Paneer Tikka Masala",price:210,category:"Main Course",veg:true,spicy:true,popular:false,img:"https://loremflickr.com/640/480/paneermasala",desc:"Grilled paneer simmered in a rich, spiced tomato gravy."},
+{id:9,name:"Paneer Butter Masala",price:180,category:"Main Course",veg:true,spicy:false,popular:true,img:"https://loremflickr.com/640/480/butterpaneer",desc:"Paneer in a velvety butter-tomato gravy — a house favourite."},
+{id:10,name:"Veg Kolhapuri",price:140,category:"Main Course",veg:true,spicy:true,popular:false,img:"https://loremflickr.com/640/480/vegcurry",desc:"Mixed vegetables in a fiery Kolhapuri-style masala."},
+{id:11,name:"Veg Malai Kofta",price:160,category:"Main Course",veg:true,spicy:false,popular:false,img:"https://loremflickr.com/640/480/kofta",desc:"Soft vegetable-paneer dumplings in a creamy cashew gravy."},
+{id:12,name:"Dal Tadka",price:170,category:"Main Course",veg:true,spicy:false,popular:false,img:"https://loremflickr.com/640/480/daltadka",desc:"Yellow lentils tempered with ghee, cumin and garlic."},
+{id:13,name:"Dal Fry",price:130,category:"Main Course",veg:true,spicy:false,popular:false,img:"https://loremflickr.com/640/480/dalfry",desc:"Everyday comfort dal, lightly spiced and buttery."},
+{id:14,name:"Mushroom Masala",price:180,category:"Main Course",veg:true,spicy:true,popular:false,img:"https://loremflickr.com/640/480/mushroomcurry",desc:"Button mushrooms cooked in a spiced onion-tomato masala."},
+{id:15,name:"Kaju Curry",price:220,category:"Main Course",veg:true,spicy:false,popular:true,img:"https://loremflickr.com/640/480/cashewcurry",desc:"Whole cashews in a rich, mildly sweet gravy."},
+{id:16,name:"Butter Chicken",price:260,category:"Main Course",veg:false,spicy:false,popular:true,img:"https://loremflickr.com/640/480/butterchicken",desc:"Tandoori chicken in a silky tomato-butter gravy. A George classic."},
+{id:17,name:"Chicken Kadhai",price:250,category:"Main Course",veg:false,spicy:true,popular:false,img:"https://loremflickr.com/640/480/kadhaichicken",desc:"Chicken cooked with capsicum and onion in kadhai masala."},
+{id:18,name:"Mutton Rogan Josh",price:320,category:"Main Course",veg:false,spicy:true,popular:false,img:"https://loremflickr.com/640/480/muttoncurry",desc:"Slow-cooked mutton in a deep red Kashmiri-style curry."},
+{id:19,name:"Chicken Biryani",price:220,category:"Biryani",veg:false,spicy:true,popular:true,img:"https://loremflickr.com/640/480/chickenbiryani",desc:"Fragrant basmati layered and dum-cooked with spiced chicken."},
+{id:20,name:"Mutton Biryani",price:260,category:"Biryani",veg:false,spicy:true,popular:false,img:"https://loremflickr.com/640/480/muttonbiryani",desc:"Slow dum-cooked mutton biryani with saffron rice."},
+{id:21,name:"Veg Biryani",price:170,category:"Biryani",veg:true,spicy:false,popular:false,img:"https://loremflickr.com/640/480/vegbiryani",desc:"Basmati rice dum-cooked with garden vegetables and whole spices."},
+{id:22,name:"Chicken Tikka Biryani",price:260,category:"Biryani",veg:false,spicy:true,popular:false,img:"https://loremflickr.com/640/480/tikkabiryani",desc:"Biryani layered with smoky tandoori chicken tikka pieces."},
+{id:23,name:"Veg Fried Rice",price:180,category:"Chinese",veg:true,spicy:false,popular:false,img:"https://loremflickr.com/640/480/friedrice",desc:"Wok-tossed rice with fresh vegetables and soy."},
+{id:24,name:"Schezwan Fried Rice",price:220,category:"Chinese",veg:true,spicy:true,popular:false,img:"https://loremflickr.com/640/480/schezwanrice",desc:"Fiery Schezwan-style fried rice with crunchy vegetables."},
+{id:25,name:"Chilli Chicken",price:240,category:"Chinese",veg:false,spicy:true,popular:true,img:"https://loremflickr.com/640/480/chillichicken",desc:"Indo-Chinese wok-tossed chicken in a tangy chilli-soy sauce."},
+{id:26,name:"Veg Manchurian",price:190,category:"Chinese",veg:true,spicy:true,popular:false,img:"https://loremflickr.com/640/480/manchurian",desc:"Crisp vegetable balls tossed in classic Manchurian sauce."},
+{id:27,name:"Chicken Noodles",price:210,category:"Chinese",veg:false,spicy:false,popular:false,img:"https://loremflickr.com/640/480/chickennoodles",desc:"Hakka-style stir-fried noodles with chicken and vegetables."},
+{id:28,name:"Masala Omelette",price:100,category:"Breakfast",veg:false,spicy:true,popular:false,img:"https://loremflickr.com/640/480/masalaomelette",desc:"Fluffy omelette with onion, tomato, green chilli and spices."},
+{id:29,name:"Grilled Chicken Sandwich",price:190,category:"Breakfast",veg:false,spicy:false,popular:false,img:"https://loremflickr.com/640/480/grilledsandwich",desc:"Toasted sandwich with shredded chicken, cheese and mayo."},
+{id:30,name:"Bun Maska",price:50,category:"Breakfast",veg:true,spicy:false,popular:true,img:"https://loremflickr.com/640/480/bunmaska",desc:"Soft bun with a generous layer of butter — a Camp classic."},
+{id:31,name:"Filter Coffee",price:70,category:"Beverages",veg:true,spicy:false,popular:false,img:"https://loremflickr.com/640/480/filtercoffee",desc:"South Indian style strong, frothy filter coffee."},
+{id:32,name:"Fresh Mango Shake",price:270,category:"Beverages",veg:true,spicy:false,popular:true,img:"https://loremflickr.com/640/480/mangoshake",desc:"Thick milkshake made with fresh seasonal mango."},
+{id:33,name:"Cold Coffee",price:190,category:"Beverages",veg:true,spicy:false,popular:false,img:"https://loremflickr.com/640/480/coldcoffee",desc:"Chilled, blended coffee topped with a scoop of ice cream."},
+{id:34,name:"Falooda with Ice Cream",price:200,category:"Desserts",veg:true,spicy:false,popular:true,img:"https://loremflickr.com/640/480/falooda",desc:"Rose-flavoured falooda with vermicelli, jelly and ice cream."},
+{id:35,name:"Gulab Jamun (2 pcs)",price:90,category:"Desserts",veg:true,spicy:false,popular:false,img:"https://loremflickr.com/640/480/gulabjamun",desc:"Warm milk-solid dumplings soaked in rose-cardamom syrup."},
+{id:36,name:"Ice Cream Sundae",price:180,category:"Desserts",veg:true,spicy:false,popular:false,img:"https://i.ibb.co/dTTp5zQ/Screenshot-2026-07-25-10-48-19-106-com-google-android-apps-maps.jpg",desc:"Your choice of flavours, layered with nuts and chocolate sauce."}
+];
+
+const CATEGORIES = ["All","Starters","Tandoor","Main Course","Biryani","Chinese","Breakfast","Beverages","Desserts"];
+
+/* ---------- STATE ---------- */
+let cart = JSON.parse(localStorage.getItem('george_cart')||'[]');
+let favorites = JSON.parse(localStorage.getItem('george_favs')||'[]');
+let recentlyViewed = JSON.parse(localStorage.getItem('george_recent')||'[]');
+let activeCategory = "All";
+let activeFilter = "all";
+let searchTerm = "";
+let sortMode = "default";
+
+function saveCart(){localStorage.setItem('george_cart', JSON.stringify(cart));}
+function saveFavs(){localStorage.setItem('george_favs', JSON.stringify(favorites));}
+function saveRecent(){localStorage.setItem('george_recent', JSON.stringify(recentlyViewed));}
+
+/* ---------- LOADER ---------- */
+window.addEventListener('load', ()=>{
+  setTimeout(()=>{document.getElementById('loader').classList.add('hide');}, 500);
+});
+
+/* ---------- HEADER SCROLL ---------- */
+const header = document.getElementById('siteHeader');
+const topBtn = document.getElementById('topBtn');
+window.addEventListener('scroll', ()=>{
+  header.classList.toggle('scrolled', window.scrollY>40);
+  topBtn.classList.toggle('show', window.scrollY>500);
+},{passive:true});
+topBtn.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ---------- MOBILE MENU ---------- */
+const mobileMenu = document.getElementById('mobileMenu');
+document.getElementById('burgerBtn').addEventListener('click', ()=>mobileMenu.classList.add('show'));
+document.getElementById('mmClose').addEventListener('click', ()=>mobileMenu.classList.remove('show'));
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>mobileMenu.classList.remove('show')));
+
+/* ---------- THEME TOGGLE ---------- */
+const themeBtn = document.getElementById('themeToggle');
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  themeBtn.textContent = t==='dark' ? '☀️' : '🌙';
+  localStorage.setItem('george_theme', t);
+}
+applyTheme(localStorage.getItem('george_theme') || 'light');
+themeBtn.addEventListener('click', ()=>{
+  applyTheme(document.documentElement.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+});
+
+/* ---------- REVEAL ON SCROLL ---------- */
+const revealObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); revealObserver.unobserve(e.target);} });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+
+/* ---------- ANIMATED COUNTERS ---------- */
+const counterObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const el = e.target;
+      const target = parseFloat(el.dataset.count);
+      const decimals = el.dataset.decimal ? parseInt(el.dataset.decimal) : 0;
+      let cur = 0; const steps=60; const inc = target/steps; let n=0;
+      const t = setInterval(()=>{
+        n++; cur += inc;
+        el.textContent = cur>=target ? target.toFixed(decimals) : cur.toFixed(decimals);
+        if(n>=steps){clearInterval(t); el.textContent=target.toFixed(decimals);}
+      },22);
+      counterObserver.unobserve(el);
+    }
+  });
+},{threshold:.4});
+document.querySelectorAll('[data-count]').forEach(el=>counterObserver.observe(el));
+
+/* ---------- TICKER ---------- */
+const tickerMsgs = ["🎉 GEORGE10 — Flat 10% off online orders","🚴 Free delivery on orders above ₹499 across Pune","🍢 Weekend Special: Mutton Kheema Pav available now","⭐ Rated 4.6/5 by 12,000+ diners","🥭 Fresh mango shakes back on the menu"];
+document.getElementById('tickerRow').innerHTML = [...tickerMsgs,...tickerMsgs].map(m=>`<span>${m}</span>`).join('');
+
+/* ---------- CATEGORY TABS ---------- */
+const catTabs = document.getElementById('catTabs');
+catTabs.innerHTML = CATEGORIES.map(c=>`<button class="cat-tab ${c==='All'?'active':''}" data-cat="${c}">${c}</button>`).join('');
+catTabs.addEventListener('click', e=>{
+  const btn = e.target.closest('.cat-tab'); if(!btn) return;
+  activeCategory = btn.dataset.cat;
+  catTabs.querySelectorAll('.cat-tab').forEach(b=>b.classList.toggle('active', b===btn));
+  renderMenu();
+});
+
+/* ---------- FILTER CHIPS ---------- */
+document.querySelectorAll('.chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    activeFilter = chip.dataset.filter;
+    renderMenu();
+  });
+});
+
+/* ---------- SEARCH & SORT ---------- */
+document.getElementById('searchInput').addEventListener('input', e=>{ searchTerm = e.target.value.toLowerCase().trim(); renderMenu(); });
+document.getElementById('sortSelect').addEventListener('change', e=>{ sortMode = e.target.value; renderMenu(); });
+
+/* ---------- COUPON COPY ---------- */
+document.getElementById('copyCoupon').addEventListener('click', function(){
+  navigator.clipboard?.writeText('GEORGE10').catch(()=>{});
+  this.textContent='Copied ✓'; setTimeout(()=>this.textContent='Copy',1600);
+});
+
+/* ---------- RENDER MENU ---------- */
+function getFiltered(){
+  let items = MENU.filter(i=>{
+    if(activeCategory!=='All' && i.category!==activeCategory) return false;
+    if(activeFilter==='veg' && !i.veg) return false;
+    if(activeFilter==='nonveg' && i.veg) return false;
+    if(activeFilter==='popular' && !i.popular) return false;
+    if(activeFilter==='favorites' && !favorites.includes(i.id)) return false;
+    if(searchTerm && !(i.name.toLowerCase().includes(searchTerm)||i.category.toLowerCase().includes(searchTerm)||i.desc.toLowerCase().includes(searchTerm))) return false;
+    return true;
+  });
+  if(sortMode==='low') items = items.slice().sort((a,b)=>a.price-b.price);
+  if(sortMode==='high') items = items.slice().sort((a,b)=>b.price-a.price);
+  if(sortMode==='az') items = items.slice().sort((a,b)=>a.name.localeCompare(b.name));
+  return items;
+}
+
+function qtyInCart(id){ const it = cart.find(c=>c.id===id); return it?it.qty:0; }
+
+function foodCardHTML(item){
+  const q = qtyInCart(item.id);
+  const isFav = favorites.includes(item.id);
+  return `
+  <div class="food-card" data-id="${item.id}">
+    <div class="food-img-wrap" data-view="${item.id}">
+      <img src="${item.img}" alt="${item.name}" loading="lazy">
+      <div class="food-badges">
+        ${item.popular?'<span class="badge badge-popular">⭐ Popular</span>':''}
+      </div>
+      <button class="fav-btn ${isFav?'active':''}" data-fav="${item.id}">${isFav?'❤':'🤍'}</button>
+    </div>
+    <div class="food-body">
+      <div class="food-top">
+        <div class="food-name">${item.name}</div>
+        <div class="food-price">₹${item.price}</div>
+      </div>
+      <div class="food-tags">
+        <span class="badge ${item.veg?'badge-veg':'badge-nonveg'}">${item.veg?'<span class="veg-dot"></span> Veg':'<span class="nonveg-dot"></span> Non-Veg'}</span>
+        ${item.spicy?'<span class="badge badge-spicy">🌶️ Spicy</span>':''}
+      </div>
+      <div class="food-desc">${item.desc}</div>
+      <div class="food-bottom">
+        ${q===0
+          ? `<button class="add-btn" data-add="${item.id}">+ Add to Cart</button>`
+          : `<div class="qty-stepper"><button data-dec="${item.id}">−</button><span class="q">${q}</span><button data-inc="${item.id}">+</button></div>`
+        }
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderMenu(){
+  const items = getFiltered();
+  const grid = document.getElementById('menuGrid');
+  grid.innerHTML = items.length ? items.map(foodCardHTML).join('') : `<div class="empty-note">No dishes match your search — try a different filter.</div>`;
+}
+
+document.getElementById('menuGrid').addEventListener('click', e=>{
+  const addBtn = e.target.closest('[data-add]');
+  const incBtn = e.target.closest('[data-inc]');
+  const decBtn = e.target.closest('[data-dec]');
+  const favBtn = e.target.closest('[data-fav]');
+  const viewImg = e.target.closest('[data-view]');
+  if(addBtn){ addToCart(parseInt(addBtn.dataset.add)); renderMenu(); }
+  if(incBtn){ changeQty(parseInt(incBtn.dataset.inc), 1); renderMenu(); }
+  if(decBtn){ changeQty(parseInt(decBtn.dataset.dec), -1); renderMenu(); }
+  if(favBtn){ toggleFav(parseInt(favBtn.dataset.fav)); renderMenu(); }
+  if(viewImg){ trackRecent(parseInt(viewImg.dataset.view)); openLightbox(MENU.find(m=>m.id===parseInt(viewImg.dataset.view)).img); }
+});
+
+/* ---------- CART LOGIC ---------- */
+function addToCart(id){
+  const item = MENU.find(m=>m.id===id);
+  const existing = cart.find(c=>c.id===id);
+  if(existing) existing.qty++; else cart.push({id:item.id,name:item.name,price:item.price,img:item.img,qty:1});
+  saveCart(); renderCart(); pulseCart();
+  trackRecent(id);
+}
+function changeQty(id, delta){
+  const existing = cart.find(c=>c.id===id);
+  if(!existing) return;
+  existing.qty += delta;
+  if(existing.qty<=0) cart = cart.filter(c=>c.id!==id);
+  saveCart(); renderCart();
+}
+function removeFromCart(id){ cart = cart.filter(c=>c.id!==id); saveCart(); renderCart(); renderMenu(); }
+function cartTotal(){ return cart.reduce((s,c)=>s+c.price*c.qty,0); }
+function cartCountTotal(){ return cart.reduce((s,c)=>s+c.qty,0); }
+
+function pulseCart(){
+  const c = document.getElementById('cartCount');
+  c.style.transform='scale(1.4)'; setTimeout(()=>c.style.transform='scale(1)',220);
+}
+
+function renderCart(){
+  document.getElementById('cartCount').textContent = cartCountTotal();
+  const wrap = document.getElementById('cartItems');
+  const foot = document.getElementById('cartFoot');
+  if(cart.length===0){
+    wrap.innerHTML = `<div class="cart-empty"><div class="em">🛒</div><p>Your cart is empty.<br>Add some delicious food!</p></div>`;
+    foot.style.display='none';
+  } else {
+    foot.style.display='block';
+    wrap.innerHTML = cart.map(c=>`
+      <div class="cart-item">
+        <img src="${c.img}" alt="${c.name}">
+        <div class="ci-body">
+          <div class="ci-top"><div class="ci-name">${c.name}</div><button class="ci-remove" data-remove="${c.id}">Remove</button></div>
+          <div class="ci-bottom">
+            <div class="ci-step"><button data-cdec="${c.id}">−</button><span class="q">${c.qty}</span><button data-cinc="${c.id}">+</button></div>
+            <div class="ci-total">₹${c.price*c.qty}</div>
+          </div>
+        </div>
+      </div>`).join('');
+    document.getElementById('cartSubtotal').textContent = '₹'+cartTotal();
+    document.getElementById('cartGrandTotal').textContent = '₹'+cartTotal();
+  }
+}
+document.getElementById('cartItems').addEventListener('click', e=>{
+  const rm=e.target.closest('[data-remove]'), inc=e.target.closest('[data-cinc]'), dec=e.target.closest('[data-cdec]');
+  if(rm) removeFromCart(parseInt(rm.dataset.remove));
+  if(inc){ changeQty(parseInt(inc.dataset.cinc),1); renderMenu(); }
+  if(dec){ changeQty(parseInt(dec.dataset.cdec),-1); renderMenu(); }
+});
+
+/* ---------- FAVORITES ---------- */
+function toggleFav(id){
+  favorites = favorites.includes(id) ? favorites.filter(f=>f!==id) : [...favorites, id];
+  saveFavs();
+}
+
+/* ---------- RECENTLY VIEWED ---------- */
+function trackRecent(id){
+  recentlyViewed = [id, ...recentlyViewed.filter(r=>r!==id)].slice(0,8);
+  saveRecent(); renderRecent();
+}
+function renderRecent(){
+  const rail = document.getElementById('recentRail');
+  const wrap = document.getElementById('recentWrap');
+  if(recentlyViewed.length===0){ wrap.style.display='none'; return; }
+  wrap.style.display='block';
+  rail.innerHTML = recentlyViewed.map(id=>{
+    const it = MENU.find(m=>m.id===id); if(!it) return '';
+    return `<div class="rail-card"><img src="${it.img}" alt="${it.name}" loading="lazy"><div class="rc-body"><div class="rc-name">${it.name}</div><div class="rc-price">₹${it.price}</div></div></div>`;
+  }).join('');
+}
+
+/* ---------- CART DRAWER ---------- */
+const cartDrawer = document.getElementById('cartDrawer');
+const overlay = document.getElementById('overlay');
+function openCart(){ cartDrawer.classList.add('show'); overlay.classList.add('show'); }
+function closeCart(){ cartDrawer.classList.remove('show'); overlay.classList.remove('show'); }
+document.getElementById('cartOpenBtn').addEventListener('click', openCart);
+document.getElementById('cartClose').addEventListener('click', closeCart);
+overlay.addEventListener('click', ()=>{ closeCart(); closeAllModals(); });
+
+/* ---------- MODALS ---------- */
+function closeAllModals(){ document.querySelectorAll('.modal').forEach(m=>m.classList.remove('show')); }
+document.querySelectorAll('[data-close-modal]').forEach(b=>b.addEventListener('click', closeAllModals));
+document.querySelectorAll('.modal-backdrop').forEach(b=>b.addEventListener('click', closeAllModals));
+
+function openLightbox(src){
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightboxModal').classList.add('show');
+}
+
+/* ---------- CHECKOUT ---------- */
+const checkoutModal = document.getElementById('checkoutModal');
+document.getElementById('checkoutBtn').addEventListener('click', ()=>{
+  if(cart.length===0) return;
+  document.getElementById('checkoutSummary').innerHTML = cart.map(c=>`<div class="row"><span>${c.name} × ${c.qty}</span><span>₹${c.price*c.qty}</span></div>`).join('') + `<div class="row total"><span>Grand Total</span><span>₹${cartTotal()}</span></div>`;
+  closeCart();
+  checkoutModal.classList.add('show');
+});
+
+document.getElementById('orderTypeSeg').addEventListener('click', e=>{
+  const opt = e.target.closest('.seg-opt'); if(!opt) return;
+  document.getElementById('orderTypeSeg').querySelectorAll('.seg-opt').forEach(o=>o.classList.remove('active'));
+  opt.classList.add('active');
+  document.querySelector('input[name=ordertype]').value = opt.dataset.val;
+});
+document.getElementById('payOpts').addEventListener('click', e=>{
+  const opt = e.target.closest('.pay-opt'); if(!opt) return;
+  document.getElementById('payOpts').querySelectorAll('.pay-opt').forEach(o=>o.classList.remove('active'));
+  opt.classList.add('active');
+  document.querySelector('input[name=paymethod]').value = opt.dataset.val;
+});
+document.getElementById('seatingSeg').addEventListener('click', e=>{
+  const opt = e.target.closest('.seg-opt'); if(!opt) return;
+  document.getElementById('seatingSeg').querySelectorAll('.seg-opt').forEach(o=>o.classList.remove('active'));
+  opt.classList.add('active');
+  document.querySelector('#bookingForm input[name=seating]').value = opt.dataset.val;
+});
+
+document.getElementById('checkoutForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const fd = new FormData(this);
+  const orderLines = cart.map(c=>`${c.name} x${c.qty} = ₹${c.price*c.qty}`).join('\\n');
+  const payload = {
+    _subject: `New Order — George Restaurant (₹${cartTotal()})`,
+    customer_name: fd.get('cname'),
+    phone: fd.get('cphone'),
+    delivery_address: fd.get('caddress'),
+    order_type: fd.get('ordertype'),
+    payment_method: fd.get('paymethod'),
+    special_instructions: fd.get('cnotes'),
+    order_items: orderLines,
+    grand_total: '₹'+cartTotal()
+  };
+  // Formspree endpoint placeholder — replace YOUR_FORM_ID with your real Formspree form id.
+  fetch('https://formspree.io/f/YOUR_FORM_ID', {
+    method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'}, body: JSON.stringify(payload)
+  }).catch(()=>{ /* silently continue — this demo works even without a live endpoint */ });
+
+  cart = []; saveCart(); renderCart(); renderMenu();
+  this.reset();
+  document.querySelectorAll('#orderTypeSeg .seg-opt').forEach((o,i)=>o.classList.toggle('active', i===0));
+  document.querySelectorAll('#payOpts .pay-opt').forEach((o,i)=>o.classList.toggle('active', i===0));
+  closeAllModals();
+  document.getElementById('successModal').classList.add('show');
+});
+
+/* ---------- BOOKING FORM ---------- */
+document.getElementById('bookingForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const fd = new FormData(this);
+  const payload = {
+    _subject:`New Table Reservation — George Restaurant`,
+    name: fd.get('name'), mobile: fd.get('mobile'), email: fd.get('email'),
+    guests: fd.get('guests'), date: fd.get('date'), time: fd.get('time'),
+    seating: fd.get('seating'), requests: fd.get('requests')
+  };
+  fetch('https://formspree.io/f/YOUR_FORM_ID', {
+    method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'}, body: JSON.stringify(payload)
+  }).catch(()=>{});
+  const msg = document.getElementById('bookingMsg');
+  msg.textContent = "Your table request has been received. George Restaurant will contact you shortly to confirm your reservation.";
+  msg.classList.add('show','ok');
+  this.reset();
+  document.querySelectorAll('#seatingSeg .seg-opt').forEach((o,i)=>o.classList.toggle('active', i===0));
+});
+
+/* ---------- GALLERY ---------- */
+const galleryData = [
+  {img:"https://i.ibb.co/CKP2PBgx/Screenshot-2026-07-25-10-47-25-571-com-google-android-apps-maps.jpg", label:"George Restaurant, Camp"},
+  {img:"https://loremflickr.com/640/480/restaurantinterior", label:"Dining Interior"},
+  {img:"https://loremflickr.com/640/480/restaurantkitchen", label:"Our Kitchen"},
+  {img:"https://loremflickr.com/640/480/indianfoodplate", label:"Signature Thali"},
+  {img:"https://loremflickr.com/640/480/familydining", label:"Family Seating"},
+  {img:"https://loremflickr.com/640/480/tandoorgrill", label:"Tandoor Live"}
+];
+document.getElementById('galleryGrid').innerHTML = galleryData.map(g=>`<a data-label="${g.label}" data-view="${g.img}"><img src="${g.img}" alt="${g.label}" loading="lazy"></a>`).join('');
+document.getElementById('galleryGrid').addEventListener('click', e=>{
+  const a = e.target.closest('[data-view]'); if(!a) return;
+  openLightbox(a.dataset.view);
+});
+
+/* ---------- REVIEWS ---------- */
+const reviews = [
+  {name:"Rohan Deshmukh", rating:5, text:"The butter chicken and tandoori roti combo here is unmatched. Been coming for years and it never disappoints."},
+  {name:"Ayesha Khan", rating:5, text:"Ordered biryani for a family get-together — arrived hot, generous portions, and full of flavour."},
+  {name:"Nikhil Patwardhan", rating:4, text:"Great Chinese section too — the chilli chicken is properly spicy. Service is quick even during peak hours."},
+  {name:"Sneha Kulkarni", rating:5, text:"Booked a table for a birthday, they set everything up perfectly. Warm staff and cosy interiors."},
+  {name:"Imran Shaikh", rating:4, text:"Solid neighbourhood spot in Camp. The paneer tikka masala is my go-to every single time."}
+];
+document.getElementById('reviewsTrack').innerHTML = reviews.map(r=>`
+  <div class="review-card">
+    <div class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
+    <p>"${r.text}"</p>
+    <div class="reviewer"><div class="av">${r.name.charAt(0)}</div><div><div class="rname">${r.name}</div><div class="rmeta">Verified Diner</div></div></div>
+  </div>`).join('');
+
+/* ---------- FAQ ---------- */
+const faqs = [
+  {q:"Do I need to pay to reserve a table?", a:"No — reservations are free. Just fill the booking form and our team will call to confirm."},
+  {q:"Do you deliver outside Camp, Pune?", a:"Yes, we currently deliver all over Pune. Delivery time may vary based on distance."},
+  {q:"Can I pay online?", a:"We currently accept Cash, UPI (on arrival/delivery) and Pay at Restaurant — no online payment gateway is required."},
+  {q:"Is the GEORGE10 coupon automatic?", a:"Show or mention the code GEORGE10 when your order is confirmed on call to avail the discount."},
+  {q:"What are your operating hours?", a:"We're open daily from 11:00 AM to 11:00 PM, including weekends and most holidays."}
+];
+document.getElementById('faqList').innerHTML = faqs.map((f,i)=>`
+  <div class="faq-item ${i===0?'open':''}">
+    <div class="faq-q"><h4>${f.q}</h4><span class="plus">+</span></div>
+    <div class="faq-a"><p>${f.a}</p></div>
+  </div>`).join('');
+document.getElementById('faqList').addEventListener('click', e=>{
+  const item = e.target.closest('.faq-item'); if(!item) return;
+  item.classList.toggle('open');
+});
+
+/* ---------- FOOTER YEAR ---------- */
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ---------- INIT ---------- */
+renderMenu();
+renderCart();
+renderRecent();
+
+})();
+</script>
+</body>
+</html>
